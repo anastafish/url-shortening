@@ -9,7 +9,7 @@ export const Navbar = () => {
 
   return (
     <div className='flex flex-row justify-between
-     items-center w-full sm:px-20 sm:py-10 px-10 py-10'>
+     items-center w-full'>
         <div className='flex sm:flex-row flex-col justify-between sm:w-[30%] w-[100%]'>
             <div className='flex flex-row justify-between'>
             <img src={logo} alt="" className='max-w-[none]'/>

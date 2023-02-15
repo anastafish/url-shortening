@@ -25,7 +25,12 @@ module.exports = {
       very_dark_violet:'hsl(var(--very-dark-violet))',
 
     },
-    extend: {},
+
+    extend: {
+      backgroundImage:{
+        shorten:"url('/src/url-shortening-api-master/images/bg-shorten-desktop.svg')"
+      }
+    },
   },
   plugins: [],
 }
