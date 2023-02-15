@@ -15,7 +15,14 @@ export const Shorten = ({handleInput, handleUrl, url}) => {
        font-poppins font-semibold text-[17px]
        sm:w-auto w-full
        "
-      >Shorten it!</button>      
+      >Shorten it!</button>   
+      <button type='button'
+      onClick={() => document.querySelector('.links').style.display = 'flex'}
+      className="bg-cyan p-3 rounded-xl text-white
+       font-poppins font-semibold text-[17px]
+       sm:w-auto w-full
+       "
+      >Links History</button>   
     </div>
   )
 }

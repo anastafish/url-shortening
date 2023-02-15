@@ -6,9 +6,19 @@ import { Statistics } from './components/Statistics';
 import { Getstarted } from './components/Getstarted';
 import { Footer } from './components/Footer';
 import { PopUp } from './components/PopUp';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ClipLoader from "react-spinners/ClipLoader";
+import { LinksPopup } from './components/LinksPopup';
+
 
 function App() {
+  localStorage.clear()
+
+  const [ spinner, setSpinner ] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setSpinner(false), 2000)
+  }, []);
 
   const [url, setUrl] = useState("")
   const [shortUrl, setShortUrl] = useState("")
@@ -16,24 +26,37 @@ function App() {
   function handleInput(event){
     setUrl(event.target.value)
   }
+  const [links, setLinks] = useState([]);
 
   async function handleUrl(){
     const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`) 
     const json = await response.json()
-    setShortUrl(json.result.short_link)
+    setShortUrl(json.result)
+    setLinks(prev => [...prev, shortUrl])
+    localStorage.setItem('links', JSON.stringify(links))
     document.querySelector('.popup').style.display = 'flex'
+
   }
 
+
   return (
-    <div className="flex flex-col items-center justify-center 
-    w-[100vw] sm:px-20 sm:py-00 px-10 py-10 pb-0 overflow-hidden">
+    <div className={`${spinner && 'flex items-center justify-center h-[100vh]'}`}>
+       {spinner && <ClipLoader
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />}
+      {!spinner && <div className="flex flex-col items-center justify-center 
+    w-[100vw] sm:px-20 sm:py-00 px-10 py-10 pb-0 overflow-hidden"> 
       <Navbar/>
       <Hero />
       <Shorten handleInput={handleInput} handleUrl={handleUrl} url={url}/>
-      <PopUp shortUrl={shortUrl} />
+      <PopUp shortUrl={shortUrl.short_link} />
+      <LinksPopup storage={JSON.parse(localStorage.getItem('links'))
+}/>
       <Statistics />
       <Getstarted />
-      <Footer/>
+      <Footer/></div>}
     </div>
   );
 }
