@@ -33,10 +33,10 @@ function App() {
     const json = await response.json()
     setShortUrl(json.result)
     setLinks(prev => [...prev, shortUrl])
-    localStorage.setItem('links', JSON.stringify(links))
+    localStorage.setItem('urls', JSON.stringify(links))
     document.querySelector('.popup').style.display = 'flex'
-
   }
+  
 
 
   return (
@@ -52,8 +52,7 @@ function App() {
       <Hero />
       <Shorten handleInput={handleInput} handleUrl={handleUrl} url={url}/>
       <PopUp shortUrl={shortUrl.short_link} />
-      <LinksPopup storage={JSON.parse(localStorage.getItem('links'))
-}/>
+      <LinksPopup links={links} />
       <Statistics />
       <Getstarted />
       <Footer/></div>}
