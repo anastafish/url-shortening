@@ -12,8 +12,6 @@ import { LinksPopup } from './components/LinksPopup';
 
 
 function App() {
-  localStorage.clear()
-
   const [ spinner, setSpinner ] = useState(true);
 
   useEffect(() => {
@@ -33,8 +31,8 @@ function App() {
     const json = await response.json()
     setShortUrl(json.result)
     setLinks(prev => [...prev, shortUrl])
-    localStorage.setItem('urls', JSON.stringify(links))
     document.querySelector('.popup').style.display = 'flex'
+    console.log(links)
   }
   
 
