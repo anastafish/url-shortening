@@ -27,14 +27,18 @@ function App() {
   const [links, setLinks] = useState([]);
 
   async function handleUrl(){
-    const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`) 
-    const json = await response.json()
-    setShortUrl(json.result)
-    setLinks(prev => [...prev, shortUrl])
-    document.querySelector('.popup').style.display = 'flex'
-    console.log(links)
+    try{
+      const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`) 
+      const json = await response.json()
+      setShortUrl(json.result)
+      setLinks(prev => [...prev, shortUrl])
+      document.querySelector('.popup').style.display = 'flex'
+    }
+    catch(e){
+      console.log(e)
+    }
+
   }
-  
 
 
   return (
@@ -49,7 +53,7 @@ function App() {
       <Navbar/>
       <Hero />
       <Shorten handleInput={handleInput} handleUrl={handleUrl} url={url}/>
-      <PopUp shortUrl={shortUrl.short_link} />
+      <PopUp  shortUrl={shortUrl.short_link} />
       <LinksPopup links={links} />
       <Statistics />
       <Getstarted />

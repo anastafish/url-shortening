@@ -18,8 +18,9 @@ export const PopUp = ({shortUrl}) => {
                     ${shortUrl ? 'block' : 'hidden'}    
     `}>
         <h1 className='font-poppins font-semibold
-         sm:text-[40px] text-[15px] text-center text-grayish'>Here is your shorten link:</h1>
-        <p className='font-poppins font-normal sm:text-[20px] text-[15px]'>{shortUrl}</p>
+         sm:text-[40px] text-[15px] text-center text-cyan'>Here is your shorten link:</h1>
+        <p className='font-poppins font-normal sm:text-[20px]
+         text-[15px] bg-white p-2 rounded-md'>{shortUrl}</p>
         <button onClick={copy} 
         className="bg-gray p-2 rounded-lg hover:bg-green-400
                    sm:w-[50%] w-fit copy
